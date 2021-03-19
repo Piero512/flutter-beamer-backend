@@ -1,13 +1,13 @@
 import {Router} from 'express';
 
-export const router = Router();
-router.use(
+export const api = Router();
+api.use(
     (req,res,next) => {
         console.log("Received request at ", Date.now());
         next();
     }
 );
 
-router.get('/', (req,res)=> {
+api.get('/', (req,res)=> {
     res.send("Index page for router");
 })

@@ -19,13 +19,18 @@ export class MemoryBackend implements PasskeyBackend {
             return undefined;
         }
     }
-    updatePosition(passkeyId: string, location: GeoLocation,password: string): void {
-        this.internalList.get(passkeyId)?.push(location);
+    updatePosition(passkeyId: string, location: GeoLocation): void {
+        let positions = this.internalList.get(passkeyId);
+        if(positions){
+            positions.push(location);
+        } else {
+            this.internalList.set(passkeyId, [location]);
+        }
     }
     subscribePosition(passkeyId: string, onNewPositionCallback: NewPositionCallback): void {
         throw new Error("Method not implemented.");
     }
-    
+
     removeLocation(passkeyId: string): boolean {
         return this.internalList.delete(passkeyId);
     }
