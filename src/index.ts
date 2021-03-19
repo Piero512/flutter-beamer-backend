@@ -6,7 +6,7 @@ import cors from 'cors';
 import {default as passKeyRouteBuilder} from "./routes/passkey";
 
 const passkeyBackend = new MemoryBackend();
-const port = 3000;
+const port = process.env['PORT'] || 3000;
 const app = express();
 app.use(express.json());
 app.use(cors())
@@ -21,5 +21,8 @@ wss.on('connection', function incoming(client) {
     client.close();
 })
 httpServer.listen(port);
+httpServer.on('listening', ()=>  {
+    console.log("Listening on port ", port);
+})
 
 
