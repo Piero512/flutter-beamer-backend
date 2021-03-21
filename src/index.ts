@@ -26,6 +26,7 @@ wss.on("connection", function incoming(client) {
         passkeyBackend.subscribePosition(parsed.passkey, (newLocation) =>
           client.send(JSON.stringify(newLocation))
         );
+        client.send(JSON.stringify(passkeyBackend.getLastLocation(parsed.passkey)));
       } else {
         client.send(
           JSON.stringify({ error: `action not supported: ${parsed.action}` })
