@@ -31,6 +31,9 @@ export class MemoryBackend implements PasskeyBackend {
     } else {
       this.internalList.set(passkeyId, [location]);
     }
+    for(let cb of this.listeners.get(passkeyId) ?? []){
+      cb(location);
+    }
   }
   subscribePosition(
     passkeyId: string,
