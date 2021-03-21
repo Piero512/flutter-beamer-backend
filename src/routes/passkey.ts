@@ -40,7 +40,7 @@ passkeyApi.post('/:id/update', (req,res) => {
     let passkeyId = req.params['id'];
     let lat = req.body['lat'];
     let long = req.body['long'];
-    if(passkeyId && backEnd?.exists(passkeyId) && lat && long){
+    if(passkeyId && backEnd && lat && long){
         backEnd.updatePosition(passkeyId, {lat, long});
         res.status(201).send('Updated successfully');
     } else {
